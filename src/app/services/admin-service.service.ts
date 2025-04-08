@@ -8,10 +8,12 @@ import axios from 'axios'
 })
 export class AdminServiceService {
 
+  private apiUrl = 'http://10.43.103.211/api/administrador';
+
   constructor() { }
 
   getAdministradores(): Promise< Administrador[] > {
-    return axios.get<Administrador[]>('http://10.43.103.211/api/finca').then(
+    return axios.get<Administrador[]>(this.apiUrl).then(
       response => response.data
     ).catch((error) => {
       console.error('Error fetching data:', error);
@@ -19,5 +21,14 @@ export class AdminServiceService {
     }
     );
   }
+
+  getAdministradorPorId(id: number): Promise<Administrador | null> {
+    return axios.get<Administrador>(`${this.apiUrl}/${id}`)
+      .then(response => response.data)
+      .catch((error) => {
+        console.error(`Error fetching administrador with id ${id}:`, error);
+        return null;
+      });
+  }  
 
 }
