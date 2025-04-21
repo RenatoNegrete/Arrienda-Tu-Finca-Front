@@ -20,5 +20,16 @@ export class ArrendadorService {
     }
     );
   }
+
+  login(email: string, contrasena: string): Promise<any> {
+    return axios.post(`${this.apiUrl}/login`, {
+      email: email,
+      contrasena: contrasena
+    }).then(response => response.data)
+      .catch(error => {
+        console.error('Login error:', error);
+        throw error;
+      });
+  }
   
 }

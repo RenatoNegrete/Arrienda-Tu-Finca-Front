@@ -1,20 +1,56 @@
+/* Barra de navegación */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background-color: white;
-    color: black;
-  }
-  
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 1rem;
-  }
-  
-  .nav-links a {
-    color: black;
-    text-decoration: none;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white; /* Color de fondo de la navbar */
+  padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.navbar .logo {
+  font-size: 24px;
+  color: black;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style-type: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+  padding: 8px 12px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-links a:hover {
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.nav-links .login-btn {
+  color: white;
+}
+
+/* Botón de "Iniciar Sesión" personalizado */
+.login-btn {
+  background-color: #425FDE; /* Color rojo para destacar el botón */
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.login-btn:hover {
+  cursor: pointer;
+  transform: scale(1.05); /* Efecto de escala */
+}

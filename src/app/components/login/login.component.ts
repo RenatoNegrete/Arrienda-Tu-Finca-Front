@@ -1,23 +1,52 @@
 import { Component } from '@angular/core';
-import { Administrador } from '../../models/Administrador';
 import { AdminServiceService } from '../../services/admin-service.service';
 import { CommonModule } from '@angular/common';
+import { ArrendadorService } from '../../services/arrendador.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
-  
-
   title = 'login'
-  datosAdministradores: Administrador[] = []
+  type = ''
+  email = ''
+  contrasena = ''
 
   constructor(
-    private adminService: AdminServiceService
+    private adminService: AdminServiceService,
+    private arrendadorService: ArrendadorService
   ){}
+
+  onSubmit() {
+    if (this.type === 'arrendador') {
+      // Si el tipo de cuenta es 'arrendador', ejecutar lógica de arrendador
+      this.arrendadorService.login(this.email, this.contrasena)
+        .then(response => {
+          console.log('Arrendador autenticado:', response);
+          // Redirigir o guardar en sesión/localStorage según sea necesario
+        })
+        .catch(error => {
+          alert('Error autenticando como arrendador: ' + error.message);
+        });
+    } else if (this.type === 'administrador') {
+      // Si el tipo de cuenta es 'administrador', ejecutar lógica de administrador
+      this.adminService.login(this.email, this.contrasena)
+        .then(response => {
+          console.log('Administrador autenticado:', response);
+          // Redirigir o guardar en sesión/localStorage según sea necesario
+        })
+        .catch(error => {
+          alert('Error autenticando como administrador: ' + error.message);
+        });
+    } else {
+      alert('Por favor seleccione un tipo de cuenta');
+    }
+  }
 
 }

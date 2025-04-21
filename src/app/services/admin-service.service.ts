@@ -29,6 +29,17 @@ export class AdminServiceService {
         console.error(`Error fetching administrador with id ${id}:`, error);
         return null;
       });
-  }  
+  }
+
+  login(email: string, contrasena: string): Promise<any> {
+    return axios.post(`${this.apiUrl}/login`, {
+      email: email,
+      contrasena: contrasena
+    }).then(response => response.data)
+      .catch(error => {
+        console.error('Login error:', error);
+        throw error;
+      });
+  }
 
 }

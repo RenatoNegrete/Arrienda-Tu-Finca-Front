@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+    font-family: 'Poppins', sans-serif;
+  }
+
+/* Aplica a todo el documento */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Asegura que el componente raíz herede el 100% del alto */
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* 100% del alto de la pantalla */
+}

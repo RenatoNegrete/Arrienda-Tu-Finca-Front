@@ -1,0 +1,85 @@
+/* Estilo general del contenedor */
+.login-container {
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 30px 40px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #425FDE;
+  }
+  
+  /* Estilo para los grupos de formulario */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  /* Etiquetas */
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  /* Inputs */
+  .form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-group input:focus {
+    border-color: #425FDE;
+    outline: none;
+    box-shadow: 0 0 4px rgba(66, 95, 222, 0.4);
+  }
+  
+  /* Botón */
+  button[type="submit"] {
+    width: 100%;
+    background-color: #425FDE;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #324acb;
+    transform: scale(1.02);
+  }
+  
+  button[type="submit"]:focus {
+    outline: none;
+    box-shadow: 0 0 4px rgba(66, 95, 222, 0.6);
+  }
+
+  .form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: white;
+    transition: border-color 0.3s ease;
+    appearance: none;
+  }
+  
+  .form-group select:focus {
+    border-color: #425FDE;
+    outline: none;
+    box-shadow: 0 0 4px rgba(66, 95, 222, 0.4);
+  }
