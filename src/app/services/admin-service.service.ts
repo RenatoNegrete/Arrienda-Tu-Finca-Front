@@ -42,4 +42,13 @@ export class AdminServiceService {
       });
   }
 
+  createAdministrador(admin: Administrador): Promise<Administrador> {
+    return axios.post<Administrador>(this.apiUrl, admin)
+      .then(response => response.data)
+      .catch(error => {
+        console.error('Error creando administrador:', error);
+        throw error;
+      });
+  }
+
 }

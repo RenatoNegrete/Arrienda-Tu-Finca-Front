@@ -32,4 +32,12 @@ export class ArrendadorService {
       });
   }
   
+  createArrendador(arrendador: Arrendador): Promise<Arrendador> {
+    return axios.post<Arrendador>(this.apiUrl, arrendador)
+      .then(response => response.data)
+      .catch(error => {
+        console.error('Error creando arrendador:', error);
+        throw error;
+      });
+  }
 }
