@@ -1,0 +1,42 @@
+<div class="login-container">
+    <h2>Crea tu cuenta</h2>
+    <form>
+
+      <div class="form-group">
+        <label for="accountType">Tipo de cuenta</label>
+        <select id="accountType" name="accountType" [(ngModel)]="type" required>
+            <option value="" disabled selected>Seleccione una opción</option>
+            <option value="arrendador">Arrendador</option>
+            <option value="administrador">Administrador</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input [(ngModel)]="nombre" name="nombre" type="nombre" placeholder="Nombre" required />
+      </div>
+
+      <div class="form-group">
+        <label for="apellido">Apellido</label>
+        <input [(ngModel)]="apellido" name="apellido" type="apellido" placeholder="Apellido" required />
+      </div>
+
+      <div class="form-group">
+        <label for="telefono">Telefono</label>
+        <input [(ngModel)]="telefono" name="telefono" type="telefono" placeholder="Telefono" required />
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input [(ngModel)]="email" name="email" type="email" placeholder="Correo" required />
+      </div>
+      
+      <div class="form-group">
+        <label for="contrasena">Contraseña</label>
+        <input [(ngModel)]="contrasena" name="contrasena" type="password" placeholder="Contraseña" required />
+      </div>
+      
+      <button type="submit" (click)="onSubmit()">Crear Cuenta</button>
+    </form>
+    <a routerLink="/login">Ya tienes una cuenta</a>
+  </div>
