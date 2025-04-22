@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ArrendadorService } from '../../services/arrendador.service';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -21,17 +22,18 @@ export class LoginComponent {
 
   constructor(
     private adminService: AdminServiceService,
-    private arrendadorService: ArrendadorService
+    private arrendadorService: ArrendadorService,
+    private router: Router
   ){}
 
   onSubmit() {
     if (this.type === 'arrendador') {
       // Si el tipo de cuenta es 'arrendador', ejecutar lógica de arrendador
       this.arrendadorService.login(this.email, this.contrasena)
-        .then(response => {
-          console.log('Arrendador autenticado:', response);
-          // Redirigir o guardar en sesión/localStorage según sea necesario
-        })
+      .then(response => {
+        console.log('Arrendador autenticado:', response);
+        this.router.navigate(['/postloginArrendador']); // Redirigir a la página de arrendador
+      })
         .catch(error => {
           alert('Error autenticando como arrendador: ' + error.message);
         });
