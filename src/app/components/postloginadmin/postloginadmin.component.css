@@ -1,0 +1,37 @@
+.postloginadmin-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f5f9fc;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .brand-name {
+    color: #425fde;
+    display: block;
+  }
+  
+  button {
+    background-color: #425fde;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px; /* esto asegura separación entre botones */
+  }
+  
+  button:hover {
+    background-color: #324acb;
+  }
+  

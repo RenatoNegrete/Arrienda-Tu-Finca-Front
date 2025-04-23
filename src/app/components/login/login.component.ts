@@ -42,7 +42,7 @@ export class LoginComponent {
       this.adminService.login(this.email, this.contrasena)
         .then(response => {
           console.log('Administrador autenticado:', response);
-          // Redirigir o guardar en sesión/localStorage según sea necesario
+          this.router.navigate(['/postloginadmin']); // Redirigir a la página de arrendador
         })
         .catch(error => {
           alert('Error autenticando como administrador: ' + error.message);
