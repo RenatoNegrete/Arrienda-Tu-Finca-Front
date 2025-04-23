@@ -1,0 +1,36 @@
+.solicitudes-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .solicitud-card {
+    background-color: #f2f2f2;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .acciones {
+    margin-top: 10px;
+  }
+  
+  button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:first-child {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  button:last-child {
+    background-color: #f44336;
+    color: white;
+  }
+  
