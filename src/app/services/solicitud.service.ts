@@ -7,17 +7,24 @@ import axios from 'axios';
 })
 export class SolicitudService {
 
-  private apiUrl = 'http://10.43.103.211/api/solicitud';
+  private apiUrl = 'http://10.43.103.211/api/solicitud'; // Ajusta esta URL
 
-  constructor() { }
+  constructor() {}
 
-  getSolicitudes(): Promise< Solicitud[] > {
-    return axios.get<Solicitud[]>(this.apiUrl).then(
-      response => response.data
-    ).catch((error) => {
-      console.error('Error fetching data:', error);
-      return [];
-    }
-    );
+  getSolicitudes(): Promise<Solicitud[]> {
+    return axios.get<Solicitud[]>(this.apiUrl)
+      .then(response => response.data)
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        return [];
+      });
+  }
+
+  actualizarSolicitud(solicitud: Solicitud): Promise<any> {
+    return axios.put(`${this.apiUrl}/${solicitud.id}`, solicitud)
+      .then(response => response.data)
+      .catch(error => {
+        console.error('Error updating data:', error);
+      });
   }
 }
