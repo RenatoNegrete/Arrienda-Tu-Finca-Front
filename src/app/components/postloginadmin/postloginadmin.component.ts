@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 export class PostloginadminComponent {
   constructor(private router: Router) {}
 
-  verFincas() {
-    this.router.navigate(['/fincas']);
+  vermisFincas() {
+    this.router.navigate(['/showfincasadmin']);
 
 }
 verSolicitudes(){
