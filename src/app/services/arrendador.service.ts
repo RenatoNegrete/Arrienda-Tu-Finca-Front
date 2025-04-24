@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Arrendador } from '../models/Arrendador';
 import axios from 'axios';
+import { ArrendadorCreateDTO } from '../models/ArrendadorCreateDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -32,4 +33,12 @@ export class ArrendadorService {
       });
   }
   
+  createArrendador(arrendador: ArrendadorCreateDTO): Promise<Arrendador> {
+    return axios.post<Arrendador>(this.apiUrl, arrendador)
+      .then(response => response.data)
+      .catch(error => {
+        console.error('Error creando arrendador:', error);
+        throw error;
+      });
+  }
 }
