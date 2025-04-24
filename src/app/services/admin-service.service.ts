@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Administrador } from '../models/Administrador';
 
 import axios from 'axios'
+import { AdminCreateDTO } from '../models/AdminCreateDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,15 @@ export class AdminServiceService {
     }).then(response => response.data)
       .catch(error => {
         console.error('Login error:', error);
+        throw error;
+      });
+  }
+
+  createAdministrador(admin: AdminCreateDTO): Promise<Administrador> {
+    return axios.post<Administrador>(this.apiUrl, admin)
+      .then(response => response.data)
+      .catch(error => {
+        console.error('Error creando administrador:', error);
         throw error;
       });
   }

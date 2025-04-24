@@ -28,25 +28,41 @@ export class SignupComponent {
   
     onSubmit() {
       if (this.type === 'arrendador') {
-        // Si el tipo de cuenta es 'arrendador', ejecutar lógica de arrendador
-        this.arrendadorService.login(this.email, this.contrasena)
-          .then(response => {
-            console.log('Arrendador autenticado:', response);
-            // Redirigir o guardar en sesión/localStorage según sea necesario
-          })
-          .catch(error => {
-            alert('Error autenticando como arrendador: ' + error.message);
-          });
+        const nuevoArrendador = {
+          nombre: this.nombre,
+          apellido: this.apellido,
+          contrasena: this.contrasena,
+          telefono: this.telefono,
+          email: this.email,
+        };
+        this.arrendadorService.createArrendador(nuevoArrendador).then(adminCreado => {
+          alert('Arrendador creado con éxito');
+          console.log(adminCreado);
+        }).catch(error => {
+          if (error.response && error.response.data) {
+            alert('Error: ' + error.response.data.message);
+          } else {
+            alert('Ocurrió un error al crear el administrador.');
+          }
+        });
       } else if (this.type === 'administrador') {
-        // Si el tipo de cuenta es 'administrador', ejecutar lógica de administrador
-        this.adminService.login(this.email, this.contrasena)
-          .then(response => {
-            console.log('Administrador autenticado:', response);
-            // Redirigir o guardar en sesión/localStorage según sea necesario
-          })
-          .catch(error => {
-            alert('Error autenticando como administrador: ' + error.message);
-          });
+        const nuevoAdmin = {
+          nombre: this.nombre,
+          apellido: this.apellido,
+          contrasena: this.contrasena,
+          telefono: this.telefono,
+          email: this.email,
+        };
+        this.adminService.createAdministrador(nuevoAdmin).then(adminCreado => {
+          alert('Administrador creado con éxito');
+          console.log(adminCreado);
+        }).catch(error => {
+          if (error.response && error.response.data) {
+            alert('Error: ' + error.response.data.message);
+          } else {
+            alert('Ocurrió un error al crear el administrador.');
+          }
+        });
       } else {
         alert('Por favor seleccione un tipo de cuenta');
       }
