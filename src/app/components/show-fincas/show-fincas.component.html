@@ -1,7 +1,31 @@
-<b>Modelos llamados con servicios externos</b><br/>
-<b>----------------</b>
-<ul>
-  <li *ngFor="let finca of datosFincas">
-    {{ finca.nombre }} - {{ finca.descripcion }}
-  </li>
-</ul>
+<div class="p-6 bg-[#f6fbff] min-h-screen">
+  <h1 class="text-4xl font-bold mb-6">Fincas en alquiler</h1>
+
+  <div class="space-y-6">
+    <div *ngFor="let finca of datosFincas" class="bg-white rounded-xl shadow-md p-4 flex items-center gap-4">
+      <img
+        [src]="(finca.idFoto)"
+        alt="Imagen de la finca"
+        class="w-40 h-28 object-cover rounded-lg"
+      />
+
+      <div class="flex-1">
+        <h2 class="text-lg font-semibold">{{ finca.nombre }}</h2>
+        <p class="text-gray-600 text-sm mb-1">{{ finca.descripcion }}</p>
+
+        <ul class="text-sm text-gray-500 flex flex-wrap gap-2">
+          <li><b>Habitaciones:</b> {{ finca.habitaciones }}</li>
+          <li><b>Baños:</b> {{ finca.banos }}</li>
+          <li><b>Mascotas:</b> {{ finca.mascotas ? 'Sí' : 'No' }}</li>
+          <li><b>Piscina:</b> {{ finca.piscina ? 'Sí' : 'No' }}</li>
+          <li><b>Asador:</b> {{ finca.asador ? 'Sí' : 'No' }}</li>
+          <li><b>Valor por noche:</b> ${{ finca.valorNoche }}</li>
+        </ul>
+      </div>
+
+      <button class="bg-black text-white px-4 py-2 rounded hover:bg-gray-800">
+        Ver Detalles
+      </button>
+    </div>
+  </div>
+</div>
