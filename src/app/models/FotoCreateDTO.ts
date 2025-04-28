@@ -1,6 +1,5 @@
-export class Foto {
+export class FotoCreateDTO {
     constructor(
-        public id: number = 0,
         public imagenUrl: string = "",
 
         public ifFinca: number | null = null

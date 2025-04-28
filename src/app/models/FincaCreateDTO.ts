@@ -1,6 +1,5 @@
-export class Finca {
+export class FincaCreateDTO {
     constructor(
-        public id: number = 0,
         public nombre: string = "",
         public tipoIngreso: string = "",
         public descripcion: string = "",
