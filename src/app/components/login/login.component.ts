@@ -5,6 +5,7 @@ import { ArrendadorService } from '../../services/arrendador.service';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
+import { AuthServiceService } from '../../services/auth-service.service';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ export class LoginComponent {
   constructor(
     private adminService: AdminServiceService,
     private arrendadorService: ArrendadorService,
+    private authService: AuthServiceService,
     private router: Router
   ){}
 
@@ -32,7 +34,7 @@ export class LoginComponent {
       this.arrendadorService.login(this.email, this.contrasena)
       .then(response => {
         console.log('Arrendador autenticado:', response);
-        localStorage.setItem('usuario', JSON.stringify(response)); // <<< Guarda el usuario
+        this.authService.guardarUsuario(response)
         this.router.navigate(['/postloginArrendador']); // Redirigir a la página de arrendador
       })
         .catch(error => {
@@ -43,7 +45,7 @@ export class LoginComponent {
       this.adminService.login(this.email, this.contrasena)
         .then(response => {
           console.log('Administrador autenticado:', response);
-          localStorage.setItem('usuario', JSON.stringify(response)); // <<< Guarda el usuario
+          this.authService.guardarUsuario(response)
           this.router.navigate(['/postloginadmin']); // Redirigir a la página de arrendador
         })
         .catch(error => {

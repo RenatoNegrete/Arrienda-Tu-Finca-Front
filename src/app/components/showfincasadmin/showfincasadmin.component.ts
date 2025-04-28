@@ -1,9 +1,12 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Finca } from '../../models/Finca';
 import { FincaService } from '../../services/finca.service';
+import { RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-showfincasadmin',
+  imports: [ CommonModule, RouterModule, NgFor ],
   templateUrl: './showfincasadmin.component.html',
   styleUrls: ['./showfincasadmin.component.css'],
 })

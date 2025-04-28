@@ -3,10 +3,10 @@
   
     <div class="finca-wrapper">
       <div class="finca-card" *ngFor="let finca of fincas">
-        <img [src]="finca.imagenUrl" alt="Imagen Finca" class="finca-img" />
+        <!-- <img [src]="finca.imagenUrl" alt="Imagen Finca" class="finca-img" /> -->
         
         <div class="finca-info">
-          <h2>{{ finca.nombre }} - {{ finca.municipio }} / {{ finca.departamento }}</h2>
+          <!-- <h2>{{ finca.nombre }} - {{ finca.municipio }} / {{ finca.departamento }}</h2> -->
           <p>{{ finca.descripcion }}</p>
           <div class="botones">
             <button (click)="editarFinca(finca.id)">Editar</button>

@@ -4,6 +4,11 @@
     <li><a routerLink="/inicio">Inicio</a></li>
     <li><a routerLink="/fincas">Nosotros</a></li>
     <li><a routerLink="/perfil">Mi perfil</a></li>
-    <li><a class="login-btn" routerLink="/login">Iniciar Sesión</a></li>
+
+    <li>
+      <a class="login-btn" (click)="onLoginClick()">
+        {{ isAuthenticated ? 'Cerrar Sesión' : 'Iniciar Sesión' }}
+      </a>
+    </li>
   </ul>
 </nav>
