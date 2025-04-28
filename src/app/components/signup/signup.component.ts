@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AdminServiceService } from '../../services/admin-service.service';
 import { ArrendadorService } from '../../services/arrendador.service';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -23,7 +24,8 @@ export class SignupComponent {
 
   constructor(
       private adminService: AdminServiceService,
-      private arrendadorService: ArrendadorService
+      private arrendadorService: ArrendadorService,
+      private router: Router
     ){}
   
     onSubmit() {
@@ -38,6 +40,10 @@ export class SignupComponent {
         this.arrendadorService.createArrendador(nuevoArrendador).then(adminCreado => {
           alert('Arrendador creado con éxito');
           console.log(adminCreado);
+          this.arrendadorService.login(adminCreado.email, adminCreado.contrasena)
+          console.log('Arrendador autenticado:', adminCreado);
+          localStorage.setItem('usuario', JSON.stringify(adminCreado)); // <<< Guarda el usuario
+          this.router.navigate(['/postloginArrendador']); // Redirigir a la página de arrendador
         }).catch(error => {
           if (error.response && error.response.data) {
             alert('Error: ' + error.response.data.message);
@@ -56,6 +62,10 @@ export class SignupComponent {
         this.adminService.createAdministrador(nuevoAdmin).then(adminCreado => {
           alert('Administrador creado con éxito');
           console.log(adminCreado);
+          this.adminService.login(adminCreado.email, adminCreado.contrasena)
+          console.log('Administrador autenticado: ', adminCreado)
+          localStorage.setItem('usuario', JSON.stringify(adminCreado))
+          this.router.navigate(['/postloginadmin'])
         }).catch(error => {
           if (error.response && error.response.data) {
             alert('Error: ' + error.response.data.message);

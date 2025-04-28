@@ -32,6 +32,7 @@ export class LoginComponent {
       this.arrendadorService.login(this.email, this.contrasena)
       .then(response => {
         console.log('Arrendador autenticado:', response);
+        localStorage.setItem('usuario', JSON.stringify(response)); // <<< Guarda el usuario
         this.router.navigate(['/postloginArrendador']); // Redirigir a la página de arrendador
       })
         .catch(error => {
@@ -42,6 +43,7 @@ export class LoginComponent {
       this.adminService.login(this.email, this.contrasena)
         .then(response => {
           console.log('Administrador autenticado:', response);
+          localStorage.setItem('usuario', JSON.stringify(response)); // <<< Guarda el usuario
           this.router.navigate(['/postloginadmin']); // Redirigir a la página de arrendador
         })
         .catch(error => {
