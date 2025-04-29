@@ -8,8 +8,8 @@
       <!-- Contenedor de fotos alineado a la izquierda -->
       <div class="flex gap-2 overflow-x-auto">
         <img
-          *ngFor="let foto of finca.fotos"
-          [src]="foto.imagenUrl"
+          *ngIf="finca.fotos.length > 0"
+          [src]="finca.fotos[0].imagenUrl"
           alt="Imagen de la finca"
           class="w-32 h-20 object-cover rounded-lg border"
         />
