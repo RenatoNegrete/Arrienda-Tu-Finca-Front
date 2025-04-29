@@ -1,18 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: autenticacion-frontend-ap
-  namespace: autenticacion-ap
+  name: project-ingress
 spec:
-  ingressCallName: public
+  ingressClassName: public
   rules:
-  - host: devherramientassdde.desarrolloeconomico.gov.co
+  - host:
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: autenticacion-frontend-ap
+            name: project-service
             port:
               number: 80
