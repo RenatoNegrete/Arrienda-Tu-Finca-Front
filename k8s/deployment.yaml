@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: project-container
-          image: localhost:5000/auth-frontend-dev
+          image: localhost:5000/proyecto:latest
           ports:
             - containerPort: 80
