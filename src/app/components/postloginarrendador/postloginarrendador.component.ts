@@ -11,6 +11,6 @@ export class PostloginarrendadorComponent {
   constructor(private router: Router) {}
   
   verFincas() {
-    this.router.navigate(['/fincas']);
+    this.router.navigate(['/showfincasadmin']);
   }
 }

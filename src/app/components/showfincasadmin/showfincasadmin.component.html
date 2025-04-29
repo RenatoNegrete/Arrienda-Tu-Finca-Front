@@ -2,11 +2,19 @@
     <h1>Tus Fincas</h1>
   
     <div class="finca-wrapper">
-      <div class="finca-card" *ngFor="let finca of fincas">
-        <!-- <img [src]="finca.imagenUrl" alt="Imagen Finca" class="finca-img" /> -->
+      <div class="finca-card" *ngFor="let finca of datosFincas">
+        <!-- Contenedor de fotos alineado a la izquierda -->
+        <div class="flex gap-2 overflow-x-auto">
+          <img
+            *ngFor="let foto of finca.fotos"
+            [src]="foto.imagenUrl"
+            alt="Imagen de la finca"
+            class="w-40 h-28 object-cover rounded-lg"
+          />
+        </div>
         
         <div class="finca-info">
-          <!-- <h2>{{ finca.nombre }} - {{ finca.municipio }} / {{ finca.departamento }}</h2> -->
+          <h2>{{ finca.nombre }}</h2>
           <p>{{ finca.descripcion }}</p>
           <div class="botones">
             <button (click)="editarFinca(finca.id)">Editar</button>

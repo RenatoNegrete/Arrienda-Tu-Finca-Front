@@ -3,6 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Finca } from '../../models/Finca';
 import { FincaService } from '../../services/finca.service';
 import { RouterModule } from '@angular/router';
+import { Foto } from '../../models/Foto';
+import { FotoService } from '../../services/foto.service';
+import { AuthServiceService } from '../../services/auth-service.service';
+
+type FincaConFotos = Finca & {fotos: Foto[]}
 
 @Component({
   selector: 'app-showfincasadmin',
@@ -11,20 +16,43 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./showfincasadmin.component.css'],
 })
 export class ShowfincasadminComponent implements OnInit {
-  fincas: Finca[] = [];
+  datosFincas: FincaConFotos[] = [];
+  usuario: any
   cargando: boolean = true;
 
-  constructor(private fincaService: FincaService) {}
+  constructor(private fincaService: FincaService, private fotoService: FotoService, private authService: AuthServiceService) {}
 
   ngOnInit(): void {
+    this.usuario = this.authService.obtenerUsuario()
     this.cargarFincas();
   }
 
-  cargarFincas(): void {
-    this.fincaService.getFincas().then((data) => {
-      this.fincas = data;
-      this.cargando = false;
-    });
+  async cargarFincas() {
+    try {
+      const fincas = await this.fincaService.getFincasByAdmin(this.usuario.id)
+
+      const fincasConFotos = await Promise.all(
+        fincas.map(async (finca) => {
+          let fotos = await this.fotoService.getFotosByFinca(finca.id)
+
+          if (!fotos || fotos.length === 0) {
+            fotos = [
+              {
+                id: 0,
+                imagenUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg',
+                idFinca: finca.id
+              }
+            ]
+          }
+
+          return {...finca, fotos}
+        })
+      )
+
+      this.datosFincas = fincasConFotos
+    } catch(error) {
+      console.error('Error fetching data')
+    }
   }
 
   editarFinca(id: number): void {

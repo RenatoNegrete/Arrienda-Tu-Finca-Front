@@ -35,7 +35,7 @@ export class LoginComponent {
       .then(response => {
         console.log('Arrendador autenticado:', response);
         this.authService.guardarUsuario(response)
-        this.router.navigate(['/postloginArrendador']); // Redirigir a la página de arrendador
+        this.router.navigate(['/postloginadmin']); // Redirigir a la página de arrendador
       })
         .catch(error => {
           alert('Error autenticando como arrendador: ' + error.message);
@@ -46,7 +46,7 @@ export class LoginComponent {
         .then(response => {
           console.log('Administrador autenticado:', response);
           this.authService.guardarUsuario(response)
-          this.router.navigate(['/postloginadmin']); // Redirigir a la página de arrendador
+          this.router.navigate(['/postloginArrendador']); // Redirigir a la página de arrendador
         })
         .catch(error => {
           alert('Error autenticando como administrador: ' + error.message);

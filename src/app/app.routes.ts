@@ -7,13 +7,16 @@ import { PostloginarrendadorComponent } from './components/postloginarrendador/p
 import { SolicitudesComponent } from './components/solicitudes/solicitudes.component';
 import { PostloginadminComponent } from './components/postloginadmin/postloginadmin.component'; // Asegúrate de importar el componente correcto para el administrador
 import { ShowfincasadminComponent } from './components/showfincasadmin/showfincasadmin.component'; // Asegúrate de importar el componente correcto para el administrador
+import { CreateFincaComponent } from './components/create-finca/create-finca.component';
+
 export const routes: Routes = [
     { path: '', component: LandingComponent},
     { path: 'fincas', component: ShowFincasComponent},
     { path: 'login', component: LoginComponent},
     { path: 'signup', component: SignupComponent},
     { path: 'solicitudes', component: SolicitudesComponent },
-    {path:'postloginArrendador' ,component: PostloginarrendadorComponent}, // Cambia esto por el nombre correcto de tu componente
-    {path:'postloginadmin' ,component: PostloginadminComponent}, // Cambia esto por el nombre correcto de tu componente
-    { path: 'showfincasadmin', component: ShowfincasadminComponent } // Replace with the correct component if needed
+    {path:'postloginArrendador' ,component: PostloginarrendadorComponent},
+    {path:'postloginadmin' ,component: PostloginadminComponent},
+    { path: 'showfincasadmin', component: ShowfincasadminComponent },
+    { path: 'create-finca', component: CreateFincaComponent}
 ];

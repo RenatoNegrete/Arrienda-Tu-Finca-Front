@@ -2,6 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Finca } from '../../models/Finca';
 import { FincaService } from '../../services/finca.service';
+import { FotoService } from '../../services/foto.service';
+import { Foto } from '../../models/Foto';
+
+type FincaConFotos = Finca & {fotos: Foto[]}
 
 @Component({
   selector: 'app-show-fincas',
@@ -11,24 +15,43 @@ import { FincaService } from '../../services/finca.service';
   styleUrls: ['./show-fincas.component.css']
 })
 export class ShowFincasComponent implements OnInit {
-  datosFincas: Finca[] = [];
+  datosFincas: FincaConFotos[] = [];
 
-  constructor(private fincaService: FincaService) {}
+  constructor(
+    private fincaService: FincaService,
+    private fotoService: FotoService
+  ) {}
 
   ngOnInit() {
     this.cargarFincas();
   }
 
-  cargarFincas() {
-    this.fincaService.getFincas().then((data: Finca[]) => {
-      this.datosFincas = data;
-    }).catch((error) => {
-      console.error('Error fetching data:', error);
-    });
+  async cargarFincas() {
+    try {
+      const fincas = await this.fincaService.getFincas()
+
+      const fincasConFotos = await Promise.all(
+        fincas.map(async (finca) => {
+          let fotos = await this.fotoService.getFotosByFinca(finca.id)
+
+          if (!fotos || fotos.length === 0) {
+            fotos = [
+              {
+                id: 0,
+                imagenUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg',
+                idFinca: finca.id
+              }
+            ]
+          }
+
+          return {...finca, fotos}
+        })
+      )
+
+      this.datosFincas = fincasConFotos
+    } catch(error) {
+      console.error('Error fetching data')
+    }
   }
 
-  getImageUrl(idFoto: number | null): string {
-    // Si tienes un servicio real de imágenes, ajusta esta ruta
-    return idFoto ? `http://10.43.103.211/api/foto/${idFoto}` : 'https://via.placeholder.com/150';
-  }
 }

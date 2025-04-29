@@ -12,7 +12,7 @@ export class PostloginadminComponent {
   constructor(private router: Router) {}
 
   vermisFincas() {
-    this.router.navigate(['/showfincasadmin']);
+    this.router.navigate(['/fincas']);
 
 }
 verSolicitudes(){

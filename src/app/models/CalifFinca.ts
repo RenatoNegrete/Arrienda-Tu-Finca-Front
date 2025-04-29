@@ -1,7 +1,8 @@
-export class Foto {
+export class CalifFinca {
     constructor(
         public id: number = 0,
-        public imagenUrl: string = "",
+        public puntuacion: number = 0,
+        public comentario: string = '',
 
         public idFinca: number | null = null
     ) {}
