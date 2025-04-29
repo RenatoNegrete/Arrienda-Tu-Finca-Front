@@ -21,7 +21,9 @@ type FincaConFotos = Finca & { fotos: Foto[] };
 export class InfoFincaComponent {
   @Input() fincaSeleccionada!: FincaConFotos;
   @Input() mostrarBotonSolicitar: boolean = false;
+  @Input() mostrarBotonEliminar: boolean = false;
   @Output() solicitar = new EventEmitter<void>();
+  @Output() eliminar = new EventEmitter<void>();
 
   departamento!: Departamento;
   municipio!: Municipio;
@@ -44,5 +46,8 @@ export class InfoFincaComponent {
     this.solicitar.emit();
   }
 
+  onEliminar() {
+    this.eliminar.emit()
+  }
 
 }

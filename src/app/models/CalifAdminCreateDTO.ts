@@ -3,6 +3,6 @@ export class CalifAdminCreateDTO {
         public puntuacion: number = 0,
         public comentario: string = '',
 
-        public idFinca: number | null = null
+        public idAdministrador: number | null = null
     ) {}
 }

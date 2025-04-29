@@ -1,33 +1,90 @@
-<h2 class="titulo-solicitudes">Solicitudes de Arriendo</h2>
+<div class="solicitudes-container">
 
-<div class="estado-filtros">
-  <button (click)="filtrarEstado('porAceptar')">Por Aceptar</button>
-  <button (click)="filtrarEstado('aceptadas')">Aceptadas</button>
-  <button (click)="filtrarEstado('rechazadas')">Rechazadas</button>
-  <button (click)="filtrarEstado('pagadas')">Pagadas</button>
-  <button (click)="filtrarEstado('porCalificar')">Por Calificar</button>
-  <button (click)="filtrarEstado('finalizadas')">Finalizadas</button>
-</div>
+  <!-- Título -->
+  <h2 class="titulo-solicitudes">Solicitudes de Arriendo</h2>
 
-<div class="solicitud-lista">
-  <div class="solicitud-card" *ngFor="let solicitud of solicitudesFiltradas">
-    <div class="solicitud-header">
-      <span class="solicitud-estado {{ estadoMap[solicitud.estado] }}">
-        {{ estadoMap[solicitud.estado] | uppercase }}
-      </span>
-    </div>
-    <div class="solicitud-body">
-      <p><strong>ID Finca:</strong> {{ solicitud.idFinca }}</p>
-      <p><strong>ID Arrendador:</strong> {{ solicitud.idArrendador }}</p>
-      <p><strong>Personas:</strong> {{ solicitud.cantpersonas }}</p>
-      <p><strong>Valor:</strong> ${{ solicitud.valor }}</p>
-      <p><strong>Llegada:</strong> {{ solicitud.fechallegada | date }}</p>
-      <p><strong>Salida:</strong> {{ solicitud.fechasalida | date }}</p>
-    </div>
-    <div class="solicitud-actions">
-      <button *ngIf="solicitud.estado === 0" (click)="aceptarSolicitud(solicitud)" class="btn-aceptar">Aceptar</button>
-      <button *ngIf="solicitud.estado === 0" (click)="rechazarSolicitud(solicitud)" class="btn-rechazar">Rechazar</button>
-      <button *ngIf="solicitud.estado === 4" (click)="calificarSolicitud(solicitud)" class="btn-calificar">Calificar</button>
+  <!-- Filtros de estado -->
+  <div class="estado-filtros">
+    <button (click)="filtrarEstado('porAceptar')">Por Aceptar</button>
+    <button (click)="filtrarEstado('aceptadas')">Aceptadas</button>
+    <button (click)="filtrarEstado('rechazadas')">Rechazadas</button>
+    <button (click)="filtrarEstado('pagadas')">Pagadas</button>
+    <button (click)="filtrarEstado('porCalificar')">Por Calificar</button>
+    <button (click)="filtrarEstado('finalizadas')">Finalizadas</button>
+  </div>
+
+  <!-- Lista de solicitudes -->
+  <div class="solicitud-lista">
+    <div class="solicitud-card" *ngFor="let solicitud of solicitudesFiltradas">
+      <div class="solicitud-header">
+        <span class="solicitud-estado {{ estadoMap[solicitud.estado] }}">
+          {{ estadoMap[solicitud.estado] | uppercase }}
+        </span>
+      </div>
+      <div class="solicitud-body">
+        <p><strong>ID Finca:</strong> {{ solicitud.idFinca }}</p>
+        <p><strong>ID Arrendador:</strong> {{ solicitud.idArrendador }}</p>
+        <p><strong>Personas:</strong> {{ solicitud.cantpersonas }}</p>
+        <p><strong>Valor:</strong> ${{ solicitud.valor }}</p>
+        <p><strong>Llegada:</strong> {{ solicitud.fechallegada | date }}</p>
+        <p><strong>Salida:</strong> {{ solicitud.fechasalida | date }}</p>
+      </div>
+      <div class="solicitud-actions">
+        <button *ngIf="solicitud.estado === 1" (click)="abrirFormularioPago(solicitud.id)" class="btn-aceptar">Pagar</button>
+        <!-- Formulario de pago que aparece dinámicamente -->
+        <div
+        *ngIf="solicitud.estado === 1 && solicitudConFormularioPagoId === solicitud.id"
+        class="formulario-pago"
+        >
+        <h3>Realiza tu pago</h3>
+        <form (ngSubmit)="confirmarPago(solicitud)">
+          <label>
+            Banco:
+            <select id="banco" name="banco" [(ngModel)]="bancoSeleccionado" required>
+              <option value="" disabled selected>Seleccione una opción</option>
+              <option *ngFor="let banco of bancos" [value]="banco.id">{{ banco.nombre }}</option>
+            </select>
+          </label>
+          <br />
+          <label>
+            Numero de cuenta:
+            <input
+              type="text"
+              [(ngModel)]="numCuenta"
+              name="numCuenta"
+              required
+            />
+          </label>
+          <br />
+          <button type="submit" class="btn-aceptar" (click)="confirmarPago(solicitud)">Confirmar Pago</button>
+          <button type="button" class="btn-rechazar" (click)="cerrarFormularioPago()">Cancelar</button>
+        </form>
+        </div>
+        <button *ngIf="solicitud.estado === 4" (click)="calificarSolicitud(solicitud)" class="btn-calificar">Calificar</button>
+        <div *ngIf="solicitud.estado === 4 && solicitudConFormularioPagoId === solicitud.id" class="formulario-comentario">
+          <h3>Califica la finca</h3>
+          <form (ngSubmit)="confirmarCalificacion(solicitud)">
+            <label>
+              Puntuacion
+              <input [(ngModel)]="puntuacion" name="puntuacion" type="number" placeholder="Puntuacion de la finca" required />
+            </label>
+            <label>
+              Comentario
+              <input [(ngModel)]="comentario" name="comentario" type="text" placeholder="Deja un comentario" required />
+            </label>
+            <label>
+              Puntuacion
+              <input [(ngModel)]="puntuacion2" name="puntuacion" type="number" placeholder="Puntuacion del administrador" required />
+            </label>
+            <label>
+              Comentario
+              <input [(ngModel)]="comentario2" name="comentario" type="text" placeholder="Deja un comentario" required />
+            </label>
+            <button type="submit" class="btn-aceptar" (click)="confirmarCalificacion(solicitud)">Calificar</button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
+
 </div>

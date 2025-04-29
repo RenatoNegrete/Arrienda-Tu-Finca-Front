@@ -6,12 +6,16 @@ import { Router } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Solicitud } from '../../models/Solicitud';
 import { SolicitudService } from '../../services/solicitud.service';
+import { FincaService } from '../../services/finca.service';
+import { FormsModule } from '@angular/forms';
+import { CalifArrendadorCreateDTO } from '../../models/CalifArrendadorCreateDTO';
+import { CalifArrendadorService } from '../../services/calif-arrendador.service';
 
 type FincaConFotos = Finca & { fotos: Foto[] };
 
 @Component({
   selector: 'app-detalle-finca-admin',
-  imports: [InfoFincaComponent, CommonModule],
+  imports: [InfoFincaComponent, CommonModule, FormsModule],
   templateUrl: './detalle-finca-admin.component.html',
   styleUrl: './detalle-finca-admin.component.css'
 })
@@ -22,6 +26,11 @@ export class DetalleFincaAdminComponent {
     solicitudes: Solicitud[] = [];
     solicitudesFiltradas: Solicitud[] = [];
     estadoActual: string = 'porAceptar';
+
+    solicitudConFormularioPagoId: number | null = null;
+
+    puntuacion: number = 0
+    comentario: string = ''
 
     estadoMap: { [key: number]: string } = { 
       0: 'porAceptar',
@@ -36,6 +45,8 @@ export class DetalleFincaAdminComponent {
     @Inject(PLATFORM_ID)
     private platformId: object,
     private solicitudService: SolicitudService,
+    private fincaService: FincaService,
+    private califService: CalifArrendadorService,
     private router: Router
   ){}
 
@@ -88,10 +99,32 @@ export class DetalleFincaAdminComponent {
   }
 
   calificarSolicitud(solicitud: Solicitud): void {
-    solicitud.estado = 6;
-    this.solicitudService.actualizarSolicitud(solicitud).then(() => {
-      this.obtenerSolicitudes();
-    });
+    this.solicitudConFormularioPagoId = solicitud.id;
+  }
+
+  confirmarCalificacion(solicitud: Solicitud) {
+      const calificacion: CalifArrendadorCreateDTO = {
+        puntuacion: this.puntuacion,
+        comentario: this.comentario,
+        idArrendador: solicitud.idArrendador
+      }
+      this.califService.saveCalificacion(calificacion)
+        .then(savedCalif => {
+          console.log('Calificacion creada con exito')
+          solicitud.estado = 6
+          this.solicitudService.actualizarSolicitud(solicitud).then(() => {
+            this.solicitudConFormularioPagoId = null
+            this.obtenerSolicitudes()
+          }).catch(error => {
+            console.error('Error al guardar la calificacion')
+          })
+        })
+    }
+
+  onDelete() {
+    this.fincaService.deleteFinca(this.fincaSeleccionada.id)
+    console.log('Finca eliminada con exito')
+    this.router.navigate(['showfincasadmin'])
   }
 
 }

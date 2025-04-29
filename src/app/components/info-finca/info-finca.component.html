@@ -34,4 +34,10 @@
         Solicitar <span>{{ fincaSeleccionada.valorNoche }} / noche</span>
       </button>
     </div>
+
+    <div *ngIf="mostrarBotonEliminar" class="eliminar">
+      <button (click)="onEliminar()">
+        Desactivar propiedad
+      </button>
+    </div>
 </div>
