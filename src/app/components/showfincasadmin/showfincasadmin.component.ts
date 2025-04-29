@@ -55,9 +55,10 @@ export class ShowfincasadminComponent implements OnInit {
     }
   }
 
-  editarFinca(id: number): void {
-    // lógica para redireccionar o abrir modal
-    console.log('Editar finca con id:', id);
+  editarFinca(finca: FincaConFotos): void {
+    localStorage.setItem('fincaSeleccionada', JSON.stringify(finca));
+    console.log('Finca seleccionada:', finca);
+    this.router.navigate(['/edit-finca']);
   }
 
   verDetalle(finca: FincaConFotos): void {

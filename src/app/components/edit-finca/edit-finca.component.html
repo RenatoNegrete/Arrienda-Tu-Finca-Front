@@ -1,0 +1,98 @@
+<div class="finca-container">
+    <h2>Edita tu finca</h2>
+    <form class="form-grid">
+      <div class="form-group">
+        <label for="nombre">Nombre de la finca</label>
+        <input [(ngModel)]="nombre" name="nombre" type="text" placeholder="Nombre de la finca" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="ingreso">Tipo de ingreso a la finca</label>
+        <input [(ngModel)]="ingreso" name="ingreso" type="text" placeholder="Tipo de ingreso" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="descripcion">Descripción de la finca</label>
+        <input [(ngModel)]="descripcion" name="descripcion" type="text" placeholder="Descripción de la finca" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="habitaciones">Habitaciones</label>
+        <input [(ngModel)]="habitaciones" name="habitaciones" type="number" placeholder="Cantidad de habitaciones" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="banos">Baños</label>
+        <input [(ngModel)]="banos" name="banos" type="number" placeholder="Cantidad de baños" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="mascotas">¿Se aceptan mascotas?</label>
+        <select id="mascotas" name="mascotas" [(ngModel)]="mascotas" required>
+          <option value="" disabled selected>Seleccione una opción</option>
+          <option [ngValue]="true">Sí</option>
+          <option [ngValue]="false">No</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="piscina">¿Tiene piscina?</label>
+        <select id="piscina" name="piscina" [(ngModel)]="piscina" required>
+          <option value="" disabled selected>Seleccione una opción</option>
+          <option [ngValue]="true">Sí</option>
+          <option [ngValue]="false">No</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="asador">¿Tiene asador?</label>
+        <select id="asador" name="asador" [(ngModel)]="asador" required>
+          <option value="" disabled selected>Seleccione una opción</option>
+          <option [ngValue]="true">Sí</option>
+          <option [ngValue]="false">No</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="valor">Valor por noche</label>
+        <input [(ngModel)]="valor" name="valor" type="number" placeholder="Precio por noche" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="departamento">Departamento</label>
+        <select id="departamento" name="departamento" [(ngModel)]="departamentoSeleccionado" required>
+          <option value="" disabled selected>Seleccione una opción</option>
+          <option *ngFor="let dep of departamentos" [value]="dep.id">{{ dep.nombre }}</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="municipio">Municipio</label>
+        <select id="municipio" name="municipio" [(ngModel)]="municipioSeleccionado" required>
+          <option value="" disabled selected>Seleccione una opción</option>
+          <option *ngFor="let muni of municipios" [value]="muni.id">{{ muni.nombre }}</option>
+        </select>
+      </div>
+  
+      <!-- Botón fuera del grid -->
+      <div class="form-group full-width">
+        <button type="submit" (click)="onSubmit()">Editar finca</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="finca-container">
+    <form class="form-grid">
+        <div class="form-group">
+            <label for="imagen">URL de la imagen</label>
+            <input [(ngModel)]="imagen" name="imagen" type="text" placeholder="URL de la imagen" required />
+        </div>
+
+        <div class="form-group full-width">
+            <button type="submit" (click)="onImagen()">Agregar imagen</button>
+        </div>
+    </form>
+
+    
+  </div>
+  

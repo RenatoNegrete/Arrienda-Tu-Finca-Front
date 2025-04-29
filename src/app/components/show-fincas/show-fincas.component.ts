@@ -35,6 +35,7 @@ export class ShowFincasComponent implements OnInit {
       const fincasConFotos = await Promise.all(
         fincas.map(async (finca) => {
           let fotos = await this.fotoService.getFotosByFinca(finca.id)
+          console.log('Fotos para finca', finca.id, fotos)
 
           if (!fotos || fotos.length === 0) {
             fotos = [

@@ -12,6 +12,7 @@ import { CreateSolicitudComponent } from './components/create-solicitud/create-s
 import { InfoFincaComponent } from './components/info-finca/info-finca.component';
 import { DetalleFincaAdminComponent } from './components/detalle-finca-admin/detalle-finca-admin.component';
 import { DetalleFincaArrendadorComponent } from './components/detalle-finca-arrendador/detalle-finca-arrendador.component';
+import { EditFincaComponent } from './components/edit-finca/edit-finca.component';
 
 export const routes: Routes = [
     { path: '', component: LandingComponent},
@@ -25,5 +26,6 @@ export const routes: Routes = [
     { path: 'create-finca', component: CreateFincaComponent},
     { path: 'create-solicitud', component: CreateSolicitudComponent},
     { path: 'detalle-finca-admin', component: DetalleFincaAdminComponent},
-    { path: 'detalle-finca-arrendador', component: DetalleFincaArrendadorComponent}
+    { path: 'detalle-finca-arrendador', component: DetalleFincaArrendadorComponent},
+    { path: 'edit-finca', component: EditFincaComponent}
 ];

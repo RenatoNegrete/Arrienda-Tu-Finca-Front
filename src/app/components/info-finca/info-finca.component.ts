@@ -27,6 +27,7 @@ export class InfoFincaComponent {
 
   departamento!: Departamento;
   municipio!: Municipio;
+  imagenActual: number = 0;
 
   constructor(
     private departamentoService: DepartamentoService,
@@ -48,6 +49,15 @@ export class InfoFincaComponent {
 
   onEliminar() {
     this.eliminar.emit()
+  }
+
+  cambiarImagen(direccion: 'siguiente' | 'anterior') {
+    const total = this.fincaSeleccionada.fotos.length;
+    if (direccion === 'siguiente') {
+      this.imagenActual = (this.imagenActual + 1) % total;
+    } else {
+      this.imagenActual = (this.imagenActual - 1 + total) % total;
+    }
   }
 
 }

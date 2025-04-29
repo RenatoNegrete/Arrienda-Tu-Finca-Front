@@ -1,10 +1,15 @@
 <div class="detalle-finca">
     <!-- Imagen principal -->
-    <div class="fondo-imagen" [style.backgroundImage]="'url(' + '' + ')'">
+    <div class="fondo-imagen" [style.backgroundImage]="'url(' + fincaSeleccionada.fotos[imagenActual].imagenUrl + ')'">
       <div class="fondo-overlay">
         <h1>{{ fincaSeleccionada.nombre }}</h1>
         <div class="precio">
           ${{ fincaSeleccionada.valorNoche }} / noche
+        </div>
+        <!-- Botones para cambiar imagen -->
+        <div class="botones-imagen">
+          <button (click)="cambiarImagen('anterior')">⬅️</button>
+          <button (click)="cambiarImagen('siguiente')">➡️</button>
         </div>
       </div>
     </div>
