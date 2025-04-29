@@ -2,7 +2,7 @@ import { CommonModule, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Finca } from '../../models/Finca';
 import { FincaService } from '../../services/finca.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Foto } from '../../models/Foto';
 import { FotoService } from '../../services/foto.service';
 import { AuthServiceService } from '../../services/auth-service.service';
@@ -20,7 +20,7 @@ export class ShowfincasadminComponent implements OnInit {
   usuario: any
   cargando: boolean = true;
 
-  constructor(private fincaService: FincaService, private fotoService: FotoService, private authService: AuthServiceService) {}
+  constructor(private fincaService: FincaService, private fotoService: FotoService, private authService: AuthServiceService, private router: Router) {}
 
   ngOnInit(): void {
     this.usuario = this.authService.obtenerUsuario()
@@ -66,7 +66,6 @@ export class ShowfincasadminComponent implements OnInit {
   }
 
   anadirFinca(): void {
-    // lógica para crear nueva finca
-    console.log('Añadir nueva finca');
+    this.router.navigate(['/create-finca'])
   }
 }

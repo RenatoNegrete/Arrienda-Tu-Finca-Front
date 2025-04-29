@@ -4,6 +4,7 @@ import { Finca } from '../../models/Finca';
 import { FincaService } from '../../services/finca.service';
 import { FotoService } from '../../services/foto.service';
 import { Foto } from '../../models/Foto';
+import { Router } from '@angular/router';
 
 type FincaConFotos = Finca & {fotos: Foto[]}
 
@@ -19,7 +20,8 @@ export class ShowFincasComponent implements OnInit {
 
   constructor(
     private fincaService: FincaService,
-    private fotoService: FotoService
+    private fotoService: FotoService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -52,6 +54,12 @@ export class ShowFincasComponent implements OnInit {
     } catch(error) {
       console.error('Error fetching data')
     }
+  }
+
+  verDetalles(finca: FincaConFotos) {
+    localStorage.setItem('fincaSeleccionada', JSON.stringify(finca));
+    console.log('Finca seleccionada:', finca);
+    this.router.navigate(['/detalle-finca']);
   }
 
 }

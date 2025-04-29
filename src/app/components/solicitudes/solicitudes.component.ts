@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common'; // Importar para *ngIf, *ngFor, 
 
 import { SolicitudService } from '../../services/solicitud.service';
 import { Solicitud } from '../../models/Solicitud';
+import { AuthServiceService } from '../../services/auth-service.service';
 
 @Component({
   selector: 'app-solicitudes',
@@ -15,6 +16,7 @@ export class SolicitudesComponent implements OnInit {
   solicitudes: Solicitud[] = [];
   solicitudesFiltradas: Solicitud[] = [];
   estadoActual: string = 'porAceptar';
+  usuario: any
 
   estadoMap: { [key: number]: string } = { 
     0: 'porAceptar',
@@ -22,17 +24,18 @@ export class SolicitudesComponent implements OnInit {
     2: 'rechazadas',
     3: 'pagadas',
     4: 'porCalificar',
-    5: 'finalizadas'
+    6: 'finalizadas'
   };
 
-  constructor(private solicitudService: SolicitudService) {}
+  constructor(private solicitudService: SolicitudService, private authService: AuthServiceService) {}
 
   ngOnInit(): void {
+    this.usuario = this.authService.obtenerUsuario()
     this.obtenerSolicitudes();
   }
 
   obtenerSolicitudes(): void {
-    this.solicitudService.getSolicitudes().then(data => {
+    this.solicitudService.getSolicitudesByArrendador(this.usuario.id).then(data => {
       this.solicitudes = data;
       this.filtrarEstado(this.estadoActual);
     });

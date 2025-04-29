@@ -8,6 +8,8 @@ import { SolicitudesComponent } from './components/solicitudes/solicitudes.compo
 import { PostloginadminComponent } from './components/postloginadmin/postloginadmin.component'; // Asegúrate de importar el componente correcto para el administrador
 import { ShowfincasadminComponent } from './components/showfincasadmin/showfincasadmin.component'; // Asegúrate de importar el componente correcto para el administrador
 import { CreateFincaComponent } from './components/create-finca/create-finca.component';
+import { CreateSolicitudComponent } from './components/create-solicitud/create-solicitud.component';
+import { InfoFincaComponent } from './components/info-finca/info-finca.component';
 
 export const routes: Routes = [
     { path: '', component: LandingComponent},
@@ -18,5 +20,7 @@ export const routes: Routes = [
     {path:'postloginArrendador' ,component: PostloginarrendadorComponent},
     {path:'postloginadmin' ,component: PostloginadminComponent},
     { path: 'showfincasadmin', component: ShowfincasadminComponent },
-    { path: 'create-finca', component: CreateFincaComponent}
+    { path: 'create-finca', component: CreateFincaComponent},
+    { path: 'create-solicitud', component: CreateSolicitudComponent},
+    { path: 'detalle-finca', component: InfoFincaComponent}
 ];

@@ -20,4 +20,13 @@ export class DepartamentoService {
     }
     );
   }
+
+  getDepartamentoById(id: number): Promise<Departamento> {
+    return axios.get<Departamento>(`${this.apiUrl}/${id}`)
+    .then(response => response.data)
+    .catch((error) => {
+      console.error(`Error fetching calificacion with id ${id}:`, error);
+      throw error; // Opcional: puedes lanzar el error o manejarlo de otra forma
+    });
+  }
 }

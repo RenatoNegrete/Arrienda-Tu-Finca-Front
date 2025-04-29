@@ -1,0 +1,96 @@
+.detalle-finca {
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Imagen principal */
+  .fondo-imagen {
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+  }
+  
+  .fondo-overlay {
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    height: 30vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  
+  .fondo-overlay h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0;  
+    width: 100%;
+  }
+  
+  .fondo-overlay .precio {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 12px;
+  }
+  
+  /* Secciones */
+  .seccion {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .seccion h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .seccion p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+  
+  /* Características */
+  .caracteristicas {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .caracteristicas li {
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+  
+  /* Botón Solicitar */
+  .solicitar {
+    text-align: right;
+    margin-top: 20px;
+  }
+  
+  .solicitar button {
+    background-color: #1e88e5;
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .solicitar button span {
+    margin-left: 10px;
+    font-weight: normal;
+  }
+  
+  .solicitar button:hover {
+    background-color: #1565c0;
+  }
+  

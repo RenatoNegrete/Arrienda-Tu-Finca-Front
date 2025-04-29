@@ -1,0 +1,38 @@
+<div class="detalle-finca">
+    <!-- Imagen principal -->
+    <div class="fondo-imagen" [style.backgroundImage]="'url(' + '' + ')'">
+      <div class="fondo-overlay">
+        <h1>{{ fincaSeleccionada.nombre }}</h1>
+        <div class="precio">
+          ${{ fincaSeleccionada.valorNoche }} / noche
+        </div>
+      </div>
+    </div>
+  
+    <!-- Sección descripción -->
+    <div class="seccion">
+      <h2>Descripción</h2>
+      <p>{{ fincaSeleccionada.descripcion }}</p>
+    </div>
+  
+    <!-- Características -->
+    <div class="seccion">
+      <h2>Características</h2>
+      <ul class="caracteristicas">
+        <li>Habitaciones: {{ fincaSeleccionada.habitaciones }}</li>
+        <li>Baños: {{ fincaSeleccionada.banos }}</li>
+        <li>Mascotas permitidas: {{ fincaSeleccionada.mascotas ? 'Sí' : 'No' }}</li>
+        <li>Piscina: {{ fincaSeleccionada.piscina ? 'Sí' : 'No' }}</li>
+        <li>Asador: {{ fincaSeleccionada.asador ? 'Sí' : 'No' }}</li>
+        <li>Departamento: {{departamento.nombre }}</li>
+        <li>Municipio: {{ municipio.nombre }} </li>
+      </ul>
+    </div>
+  
+    <!-- Botón Solicitar -->
+    <div class="solicitar">
+      <button (click)="onSubmit()">
+        Solicitar <span>{{ fincaSeleccionada.valorNoche }} / noche</span>
+      </button>
+    </div>
+  </div>
