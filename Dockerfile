@@ -9,6 +9,8 @@ RUN npm install --legacy-peer-deps \
     && npm install -g @angular/cli \
     && ng build
 
+RUN ls -la /app/dist
+
 # Etapa 2: servir con Apache
 FROM httpd:2.4
 
