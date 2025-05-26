@@ -38,13 +38,12 @@ export class SignupComponent {
           contrasena: this.contrasena,
           telefono: this.telefono,
           email: this.email,
+          type: 'ARRENDADOR'
         };
-        this.arrendadorService.createArrendador(nuevoArrendador).then(adminCreado => {
-          console.log(adminCreado);
-          this.arrendadorService.login(adminCreado.email, adminCreado.contrasena)
+        this.arrendadorService.register(nuevoArrendador).then(adminCreado => {
           console.log('Arrendador autenticado:', adminCreado);
-          this.authService.guardarUsuario(adminCreado)
-          this.router.navigate(['/postloginArrendador']); // Redirigir a la página de arrendador
+          this.authService.guardarToken(adminCreado)
+          this.router.navigate(['/postloginArrendador']);
         }).catch(error => {
           if (error.response && error.response.data) {
             alert('Error: ' + error.response.data.message);
@@ -59,12 +58,11 @@ export class SignupComponent {
           contrasena: this.contrasena,
           telefono: this.telefono,
           email: this.email,
+          type: 'ADMINISTRADOR'
         };
-        this.adminService.createAdministrador(nuevoAdmin).then(adminCreado => {
-          console.log(adminCreado);
-          this.adminService.login(adminCreado.email, adminCreado.contrasena)
+        this.adminService.register(nuevoAdmin).then(adminCreado => {
           console.log('Administrador autenticado: ', adminCreado)
-          this.authService.guardarUsuario(adminCreado)
+          this.authService.guardarToken(adminCreado)
           this.router.navigate(['/postloginadmin'])
         }).catch(error => {
           if (error.response && error.response.data) {

@@ -3,6 +3,7 @@ import { Administrador } from '../models/Administrador';
 
 import axios from 'axios'
 import { AdminCreateDTO } from '../models/AdminCreateDTO';
+import { RegisterRequest } from '../models/RegisterRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { AdminCreateDTO } from '../models/AdminCreateDTO';
 export class AdminServiceService {
 
   private apiUrl = 'http://10.43.103.211/api/administrador';
+  private authUrl = 'http://10.43.103.211/auth';
 
   constructor() { }
 
@@ -32,15 +34,25 @@ export class AdminServiceService {
       });
   }
 
-  login(email: string, contrasena: string): Promise<any> {
-    return axios.post(`${this.apiUrl}/login`, {
+  login(email: string, contrasena: string, type: string): Promise<any> {
+    return axios.post(`${this.authUrl}/login`, {
       email: email,
-      contrasena: contrasena
+      contrasena: contrasena,
+      type: type
     }).then(response => response.data)
       .catch(error => {
         console.error('Login error:', error);
         throw error;
       });
+  }
+
+  register(request: RegisterRequest): Promise<any> {
+    return axios.post(`${this.authUrl}/register`, request)
+      .then(response => response.data)
+      .catch(error => {
+        console.error('Register error', error);
+        throw error;
+      })
   }
 
   createAdministrador(admin: AdminCreateDTO): Promise<Administrador> {

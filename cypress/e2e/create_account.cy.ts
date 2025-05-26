@@ -25,6 +25,8 @@ describe('template spec', () => {
     cy.get('input[name="telefono"]').type('3111234567');
     cy.get('input[name="email"]').type('juan@example.com');
     cy.get('input[name="contrasena"]').type('MiClaveSegura123');
+
+    cy.contains('Crear Cuenta').click();
     
   })
 })

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServiceService {
 
-  private usuarioKey = 'usuario';
+  private tokenKey = 'auth_token';
 
   constructor() { }
 
@@ -13,27 +14,39 @@ export class AuthServiceService {
     return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
   }
 
-  guardarUsuario(usuario: any) {
+  guardarToken(tokenObj: { token: string; refreshToken: string }) {
     if (this.isBrowser()) {
-      localStorage.setItem(this.usuarioKey, JSON.stringify(usuario));
+      localStorage.setItem(this.tokenKey, JSON.stringify(tokenObj));
     }
   }
 
   obtenerUsuario(): any {
     if (this.isBrowser()) {
-      const usuario = localStorage.getItem(this.usuarioKey);
-      return usuario ? JSON.parse(usuario) : null;
+      const raw = localStorage.getItem(this.tokenKey);
+      if (raw) {
+        try {
+          const parsed = JSON.parse(raw);
+          return jwtDecode(parsed.token); // Decodificamos el campo "token"
+        } catch (e) {
+          console.error('Error al decodificar el token:', e);
+          return null;
+        }
+      }
     }
     return null;
   }
 
   estaAutenticado(): boolean {
-    return this.obtenerUsuario() !== null;
+    const usuario = this.obtenerUsuario();
+    if (!usuario || !usuario.exp) return false;
+
+    const now = Math.floor(Date.now() / 1000);
+    return usuario.exp > now;
   }
 
   logout() {
     if (this.isBrowser()) {
-      localStorage.removeItem(this.usuarioKey);
+      localStorage.removeItem(this.tokenKey);
     }
   }
 }

@@ -31,10 +31,10 @@ export class LoginComponent {
   onSubmit() {
     if (this.type === 'arrendador') {
       // Si el tipo de cuenta es 'arrendador', ejecutar lógica de arrendador
-      this.arrendadorService.login(this.email, this.contrasena)
+      this.arrendadorService.login(this.email, this.contrasena, 'ARRENDADOR')
       .then(response => {
         console.log('Arrendador autenticado:', response);
-        this.authService.guardarUsuario(response)
+        this.authService.guardarToken(response)
         this.router.navigate(['/postloginadmin']); // Redirigir a la página de arrendador
       })
         .catch(error => {
@@ -42,10 +42,10 @@ export class LoginComponent {
         });
     } else if (this.type === 'administrador') {
       // Si el tipo de cuenta es 'administrador', ejecutar lógica de administrador
-      this.adminService.login(this.email, this.contrasena)
+      this.adminService.login(this.email, this.contrasena, 'ADMINISTRADOR')
         .then(response => {
           console.log('Administrador autenticado:', response);
-          this.authService.guardarUsuario(response)
+          this.authService.guardarToken(response)
           this.router.navigate(['/postloginArrendador']); // Redirigir a la página de arrendador
         })
         .catch(error => {
