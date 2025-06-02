@@ -26,7 +26,7 @@ export class AuthServiceService {
       if (raw) {
         try {
           const parsed = JSON.parse(raw);
-          return jwtDecode(parsed.token); // Decodificamos el campo "token"
+          return jwtDecode(parsed.token);
         } catch (e) {
           console.error('Error al decodificar el token:', e);
           return null;
@@ -48,5 +48,16 @@ export class AuthServiceService {
     if (this.isBrowser()) {
       localStorage.removeItem(this.tokenKey);
     }
+  }
+
+  getAuthHeaders(): any {
+    const tokenData = localStorage.getItem(this.tokenKey);
+    if (tokenData) {
+      const parsed = JSON.parse(tokenData);
+      return {
+        Authorization: `Bearer ${parsed.token}`
+      };
+    }
+    return {};
   }
 }

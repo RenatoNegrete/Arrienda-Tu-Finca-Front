@@ -18,13 +18,7 @@ export class PostloginadminComponent {
     const usuario = this.authService.obtenerUsuario();
 
     if (usuario) {
-      const id = usuario.id;       // <- el ID del usuario (viene de setId)
-      const email = usuario.sub;    // <- el email (viene de setSubject)
-     const nombre = usuario.nombre; // <- el nombre (viene de setClaims)
-
-      console.log('ID:', id);
-      console.log('Email:', email);
-      console.log('Nombre:', nombre);
+      console.log(usuario)
     }
 
 }

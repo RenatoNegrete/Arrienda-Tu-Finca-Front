@@ -43,7 +43,7 @@ export class SignupComponent {
         this.arrendadorService.register(nuevoArrendador).then(adminCreado => {
           console.log('Arrendador autenticado:', adminCreado);
           this.authService.guardarToken(adminCreado)
-          this.router.navigate(['/postloginArrendador']);
+          this.router.navigate(['/postloginadmin']);
         }).catch(error => {
           if (error.response && error.response.data) {
             alert('Error: ' + error.response.data.message);
@@ -63,7 +63,7 @@ export class SignupComponent {
         this.adminService.register(nuevoAdmin).then(adminCreado => {
           console.log('Administrador autenticado: ', adminCreado)
           this.authService.guardarToken(adminCreado)
-          this.router.navigate(['/postloginadmin'])
+          this.router.navigate(['/postloginArrendador'])
         }).catch(error => {
           if (error.response && error.response.data) {
             alert('Error: ' + error.response.data.message);

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Finca } from '../models/Finca';
 import axios from 'axios';
 import { FincaCreateDTO } from '../models/FincaCreateDTO';
+import { AuthServiceService } from './auth-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,12 @@ export class FincaService {
 
   private apiUrl = 'http://10.43.103.211/api/finca';
 
-  constructor() { }
+  constructor(private authService: AuthServiceService) { }
 
   getFincas(): Promise< Finca[] > {
-    return axios.get<Finca[]>(this.apiUrl).then(
+    return axios.get<Finca[]>(this.apiUrl, {
+      headers: this.authService.getAuthHeaders()
+    }).then(
       response => response.data
     ).catch((error) => {
       console.error('Error fetching data:', error);
@@ -22,7 +25,9 @@ export class FincaService {
   }
 
   getFincaPorId(id: number): Promise<Finca> {
-    return axios.get<Finca>(`${this.apiUrl}/${id}`)
+    return axios.get<Finca>(`${this.apiUrl}/${id}`, {
+      headers: this.authService.getAuthHeaders()
+    })
       .then(response => response.data)
       .catch((error) => {
         console.error(`Error fetching finca with id ${id}:`, error);
@@ -31,7 +36,9 @@ export class FincaService {
   }
 
   saveFinca(finca: FincaCreateDTO): Promise<Finca> {
-    return axios.post<Finca>(this.apiUrl, finca)
+    return axios.post<Finca>(this.apiUrl, finca, {
+      headers: this.authService.getAuthHeaders()
+    })
       .then(response => response.data)
       .catch((error) => {
         console.error('Error saving finca:', error);
@@ -40,7 +47,9 @@ export class FincaService {
   }
 
   updateFinca(finca: Finca): Promise<Finca> {
-    return axios.put<Finca>(this.apiUrl, finca)
+    return axios.put<Finca>(this.apiUrl, finca, {
+      headers: this.authService.getAuthHeaders()
+    })
       .then(response => response.data)
       .catch((error) => {
         console.error('Error updating finca:', error);
@@ -49,7 +58,9 @@ export class FincaService {
   }
 
   deleteFinca(id: number): Promise<void> {
-    return axios.delete<void>(`${this.apiUrl}/${id}`)
+    return axios.delete<void>(`${this.apiUrl}/${id}`, {
+      headers: this.authService.getAuthHeaders()
+    })
       .then(response => response.data)
       .catch((error) => {
         console.error(`Error deleting finca with id ${id}:`, error);
@@ -58,7 +69,9 @@ export class FincaService {
   }
 
   getFincasByAdmin(idAdmin: number): Promise<Finca[]> {
-    return axios.get<Finca[]>(`${this.apiUrl}/admin/${idAdmin}`)
+    return axios.get<Finca[]>(`${this.apiUrl}/admin/${idAdmin}`, {
+      headers: this.authService.getAuthHeaders()
+    })
       .then(response => response.data)
       .catch((error) => {
         console.error(`Error fetching fincas for admin id ${idAdmin}:`, error);
@@ -67,7 +80,9 @@ export class FincaService {
   }
 
   getFincasByDepartamento(idDepartamento: number): Promise<Finca[]> {
-    return axios.get<Finca[]>(`${this.apiUrl}/departamento/${idDepartamento}`)
+    return axios.get<Finca[]>(`${this.apiUrl}/departamento/${idDepartamento}`, {
+      headers: this.authService.getAuthHeaders()
+    })
       .then(response => response.data)
       .catch((error) => {
         console.error(`Error fetching fincas for departamento id ${idDepartamento}:`, error);
@@ -76,7 +91,9 @@ export class FincaService {
   }
 
   getFincasByHabitaciones(cantHabitaciones: number): Promise<Finca[]> {
-    return axios.get<Finca[]>(`${this.apiUrl}/habitaciones/${cantHabitaciones}`)
+    return axios.get<Finca[]>(`${this.apiUrl}/habitaciones/${cantHabitaciones}`, {
+      headers: this.authService.getAuthHeaders()
+    })
       .then(response => response.data)
       .catch((error) => {
         console.error(`Error fetching fincas with ${cantHabitaciones} habitaciones:`, error);

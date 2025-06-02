@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CalifArrendador } from '../models/CalifArrendador';
 import axios from 'axios';
 import { CalifArrendadorCreateDTO } from '../models/CalifArrendadorCreateDTO';
+import { AuthServiceService } from './auth-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,12 @@ export class CalifArrendadorService {
 
   private apiUrl = 'http://10.43.103.211/api/calif-arrendador'
 
-  constructor() { }
+  constructor(private authService: AuthServiceService) { }
 
   getCalificacionById(id: number): Promise<CalifArrendador> {
-    return axios.get<CalifArrendador>(`${this.apiUrl}/${id}`)
+    return axios.get<CalifArrendador>(`${this.apiUrl}/${id}`, {
+      headers: this.authService.getAuthHeaders()
+    })
     .then(response => response.data)
     .catch((error) => {
       console.error(`Error fetching calificacion with id ${id}:`, error);
@@ -22,7 +25,9 @@ export class CalifArrendadorService {
   }
 
   saveCalificacion(calificacion: CalifArrendadorCreateDTO): Promise<CalifArrendador> {
-    return axios.post<CalifArrendador>(this.apiUrl, calificacion)
+    return axios.post<CalifArrendador>(this.apiUrl, calificacion, {
+      headers: this.authService.getAuthHeaders()
+    })
       .then(response => response.data)
       .catch((error) => {
         console.error('Error saving calificacion:', error);
@@ -31,7 +36,9 @@ export class CalifArrendadorService {
   }
 
   getCalificacionesByFinca(idAdmin: number): Promise<CalifArrendador[]> {
-    return axios.get<CalifArrendador[]>(`${this.apiUrl}/departamento/${idAdmin}`)
+    return axios.get<CalifArrendador[]>(`${this.apiUrl}/departamento/${idAdmin}`, {
+      headers: this.authService.getAuthHeaders()
+    })
       .then(response => response.data)
       .catch((error) => {
         console.error(`Error fetching calificacoines for finca id ${idAdmin}:`, error);

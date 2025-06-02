@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Departamento } from '../models/Departamento';
 import axios from 'axios';
+import { AuthServiceService } from './auth-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,12 @@ export class DepartamentoService {
 
   private apiUrl = 'http://10.43.103.211/api/departamento';
 
-  constructor() { }
+  constructor(private authService: AuthServiceService) { }
 
   getDepartamentos(): Promise< Departamento[] > {
-    return axios.get<Departamento[]>(this.apiUrl).then(
+    return axios.get<Departamento[]>(this.apiUrl, {
+      headers: this.authService.getAuthHeaders()
+    }).then(
       response => response.data
     ).catch((error) => {
       console.error('Error fetching data:', error);
@@ -22,7 +25,9 @@ export class DepartamentoService {
   }
 
   getDepartamentoById(id: number): Promise<Departamento> {
-    return axios.get<Departamento>(`${this.apiUrl}/${id}`)
+    return axios.get<Departamento>(`${this.apiUrl}/${id}`, {
+      headers: this.authService.getAuthHeaders()
+    })
     .then(response => response.data)
     .catch((error) => {
       console.error(`Error fetching calificacion with id ${id}:`, error);
