@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
@@ -44,11 +45,19 @@ export class AuthServiceService {
     return usuario.exp > now;
   }
 
-  logout() {
-    if (this.isBrowser()) {
-      localStorage.removeItem(this.tokenKey);
-    }
-  }
+  logout(): Promise<void> {
+    const headers = this.getAuthHeaders();
+
+    return axios.post('http://10.43.103.211/auth/logout', null, { headers })
+      .then(() => {
+        if (this.isBrowser()) {
+          localStorage.removeItem(this.tokenKey);
+        }
+      })
+      .catch(error => {
+        console.error('Error during logout:', error);
+      });
+  } 
 
   getAuthHeaders(): any {
     const tokenData = localStorage.getItem(this.tokenKey);
