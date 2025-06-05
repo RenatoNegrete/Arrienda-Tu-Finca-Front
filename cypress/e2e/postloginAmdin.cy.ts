@@ -37,7 +37,7 @@ describe('Administrador: Ver listado de fincas', () => {
 
     // Aquí validamos que aparece la lista de fincas
     // Ajusta los selectores según cómo se muestren en tu app
-cy.url().should('include', '/showfincasadmin');
+    cy.url().should('include', '/showfincasadmin');
 
     // Por ejemplo, si hay un título o lista de fincas
     // Puedes cambiar el texto o selector según lo que tu app muestre
